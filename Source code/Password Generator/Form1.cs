@@ -77,15 +77,9 @@ namespace Password_Generator
         private void SetCheckBoxes()
         {
             // Set Initial Checkbox Charset Selection
-            Numbers.Checked           = Convert.ToBoolean(checkBoxValues[0]);
-            SmallCapLetters.Checked   = Convert.ToBoolean(checkBoxValues[1]);
-            trimmedSmallCaps.Checked  = Convert.ToBoolean(checkBoxValues[2]);
-            BigCapLetters.Checked     = Convert.ToBoolean(checkBoxValues[3]);
-            trimmedBigCaps.Checked    = Convert.ToBoolean(checkBoxValues[4]);
-            AllSpecialChars.Checked   = Convert.ToBoolean(checkBoxValues[5]);
-            BasicSpecialChars.Checked = Convert.ToBoolean(checkBoxValues[6]);
-            specialChar17.Checked     = Convert.ToBoolean(checkBoxValues[7]);
-            specialChar8.Checked      = Convert.ToBoolean(checkBoxValues[8]);
+            int i = 0;
+            foreach (CheckBox cb in DataType.Controls)
+            { cb.Checked = Convert.ToBoolean(checkBoxValues[i]); i++; }
         }
 
         private void passwordLength_KeyDown(object sender, KeyEventArgs e)
@@ -104,15 +98,9 @@ namespace Password_Generator
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Get Selected Charsets
-            checkBoxValues[0] = Convert.ToInt32(Numbers.Checked);
-            checkBoxValues[1] = Convert.ToInt32(SmallCapLetters.Checked);
-            checkBoxValues[2] = Convert.ToInt32(trimmedSmallCaps.Checked);
-            checkBoxValues[3] = Convert.ToInt32(BigCapLetters.Checked);
-            checkBoxValues[4] = Convert.ToInt32(trimmedBigCaps.Checked);
-            checkBoxValues[5] = Convert.ToInt32(AllSpecialChars.Checked);
-            checkBoxValues[6] = Convert.ToInt32(BasicSpecialChars.Checked);
-            checkBoxValues[7] = Convert.ToInt32(specialChar17.Checked);
-            checkBoxValues[8] = Convert.ToInt32(specialChar8.Checked);
+            int i = 0;
+            foreach (CheckBox cb in DataType.Controls)
+            { checkBoxValues[i] = Convert.ToInt32(cb.Checked); i++; }
             // Store Selection into Registry
             RegistryKey regKey = Registry.CurrentUser.OpenSubKey("Password Generator", true);
             string temp = string.Join("", checkBoxValues);
